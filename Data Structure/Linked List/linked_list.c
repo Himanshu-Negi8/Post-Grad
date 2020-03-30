@@ -80,6 +80,39 @@ node*insertNodeAtK(node*head,int val,int k)
 		return head;
 	}
 }
+
+node*deleteAtHead(node*head)
+{
+	if(head==NULL)
+	{
+		printf("empty\n");
+		return NULL;
+	}
+	else
+	{
+		node*p; 
+		p=head;
+		head=head->next;
+		printf("%d is deleted\n",p->info);
+		free(p);
+	}
+	
+	return head;
+}
+
+node*deleteAtLast(node*head)
+{
+	if(head==NULL)
+	{
+		return NULL;
+	}
+	else
+	{
+		node*temp=head;
+		
+	}
+}
+
 void display(node*tp)
 {
 	node*p;
@@ -90,7 +123,9 @@ void display(node*tp)
 		printf("%d ",p->info);
 		p=p->next;
 	}
+	printf("\n");
 }
+
 
 void main()
 {
@@ -115,6 +150,8 @@ void main()
 	printf("enter the item to be inserted and location: ");
 	scanf("%d%d",&val,&k);
 	start = insertNodeAtK(start,val,k);	
-	
 	display(start);
+	start=deleteAtHead(start);
+	display(start);
+	
 }
