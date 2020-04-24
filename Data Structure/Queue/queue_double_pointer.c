@@ -31,7 +31,7 @@ void remove_node(node**front)
 		printf("%d removed\n",temp->data);
 		if((*front)->next==NULL)
 		{
-			*front=NULL;
+			(*front)=NULL;
 		}else{
 			*front=(*front)->next;
 		}
@@ -76,11 +76,13 @@ void main()
 			if(front==NULL)
 			{
 				printf("Queue is empty already.");
-			}else{
+			}
+			
+			else{
 				remove_node(&front);
 				if(front==NULL)
 				{
-					front=rear;
+					rear=front;
 				}
 			}
 		}
