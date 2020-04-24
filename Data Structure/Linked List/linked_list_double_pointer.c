@@ -19,7 +19,7 @@ void pop(node**head_ref){
 		printf("nothing");
 	}
 	else{
-		node*p = (*head_ref);
+		node*p = (*head_ref);a
 		printf("%d deleted node",p->info);
 		*head_ref=(*head_ref)->next;
 		free(p);
