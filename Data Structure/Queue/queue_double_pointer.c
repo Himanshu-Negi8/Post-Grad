@@ -80,7 +80,7 @@ void main()
 				remove_node(&front);
 				if(front==NULL)
 				{
-					front==rear;
+					front=rear;
 				}
 			}
 		}
