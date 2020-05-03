@@ -179,7 +179,7 @@ void insertAtHead(node**head_ref,int value)
 	temp->next = (*head_ref);
 	*head_ref = temp;	
 }
-void pop(node**head_ref){
+void deleteAthead(node**head_ref){
 	if(*head_ref==NULL){
 		printf("nothing");
 	}
@@ -229,7 +229,7 @@ int main()
 	insertAtHead(&head,30);
 	display(head);
 	printf("\n");
-	pop(&head);
+	deleteAthead(&head);
 	printf("\n");
 	display(head);
 	return 0;
