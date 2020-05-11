@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+#define MAX(a,b) ((a>b)?a:b)
+
 typedef struct node{
 	
 	int data;
@@ -63,7 +65,7 @@ int height(node*root)
 	}
 	int left = height(root->left);
 	int right = height(root->right);
-	return max(left,right)+1;
+	return MAX(left,right)+1;
 }
 
 void printKthlevel(node*root,int k)
@@ -74,7 +76,7 @@ void printKthlevel(node*root,int k)
 	}
 	if(k==1)
 	{
-		cout<<root->data<<" ";
+		printf("%d ",root->data);
 		return;
 	}
 	printKthlevel(root->left,k-1);
@@ -84,10 +86,14 @@ void printKthlevel(node*root,int k)
 void printAllLevels(node*root)
 {
 	int h = height(root);
-	for(int i=1;i<=h;i++)
+	int i;
+	for(i=1;i<=h;i++)
 	{
+		printf("printing %d level : ",i);
 		printKthlevel(root,i);
-		cout<<endl; 
+	
+		printf("\n");
+		
 	}
 }
 int countNodes(node*root){
@@ -101,37 +107,6 @@ int countNodes(node*root){
 }
 
 
-//printing the level wise tree in O(n) time
-void bfs(node*root) {
-
-	queue<node*>q;
-	
-	q.push(root);
-	
-	while(!q.empty()){
-		
-		node*f = q.front();
-		if(f==NULL)
-		{
-				cout<<endl;
-				q.pop();
-				if(!q.empty()){
-					q.push(NULL);
-				}
-		}else{
-			cout<<f->data<<" ";
-			q.pop();
-			if(f->left){
-				q.push(f->left);
-			}
-			if(f->right){
-				q.push(f->right);
-			}
-		}
-		
-	}
-	return;
-}
 
 int sumOfAllNodes(node*root){
 	
@@ -155,7 +130,7 @@ int diameter(node*root){
 	int op1 = h1+h2;
 	int op2 = diameter(root->left);
 	int op3 = diameter(root->right);
-	return max(op1,max(op2,op3));
+	return MAX(op1,MAX(op2,op3));
 }
 
 int replaceParentWithChildSum(node*root){
@@ -179,12 +154,21 @@ int replaceParentWithChildSum(node*root){
 void main()
 {
 	node*root = NULL;
-	root = insert(root,30);
-	insert(root,40);
-	insert(root,20);
-	insert(root,10);
-	insert(root,50);
-	insert(root,5);
-	preorder(root);
-	inorder(root);
+	root = insert(root,100);
+	insert(root,220);
+	insert(root,340);
+	insert(root,700);
+	insert(root,670);
+	insert(root,890);
+	insert(root,540);
+	insert(root,320);
+	insert(root,140);
+	insert(root,560);
+	insert(root,660);
+	insert(root,800);
+	
+	
+	printAllLevels(root);
+
+
 }
