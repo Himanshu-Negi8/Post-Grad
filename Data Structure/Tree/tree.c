@@ -57,6 +57,64 @@ void inorder(node*root)
 		
 	}
 }
+
+
+node*deleteNode(node*root,int key)
+{
+	if(root==NULL){
+		return root;
+	}
+	
+	else if(key<root->data){
+		root->left = deleteNode(root->left,key);
+		return root;
+	}
+	
+	else if(key>root->data){
+		root->right = deleteNode(root->right,key);
+		return root;
+	}
+	else if(root->data==key){
+		//node is leaf
+		
+			if(root->left==NULL && root->right==NULL){
+				free(root);
+				return NULL;
+				
+			}
+			
+			//node having 1 child only
+			
+			if(root->left!=NULL && root->right==NULL){
+				node*temp = root->left;
+				free(root);
+				return temp;
+			}
+			
+			if(root->left==NULL && root->right!=NULL){
+				node*temp = root->right;
+				free(root);
+				return temp;
+			}
+			
+			//3.node with 2 child
+			
+			node*replace = root->right;
+			while(replace->left!=NULL){
+				replace = replace->left;
+			}
+			root->data = replace->data;
+			root->right = deleteNode(root->right,replace->data);
+			
+			return root;
+		}
+		 
+		
+}
+	
+
+
+
 int height(node*root)
 {
 	if(root==NULL)
@@ -154,20 +212,24 @@ int replaceParentWithChildSum(node*root){
 void main()
 {
 	node*root = NULL;
-	root = insert(root,100);
-	insert(root,220);
-	insert(root,340);
-	insert(root,700);
-	insert(root,670);
-	insert(root,890);
-	insert(root,540);
-	insert(root,320);
-	insert(root,140);
-	insert(root,560);
-	insert(root,660);
-	insert(root,800);
+	root = insert(root,50);
+	insert(root,22);
+	insert(root,34);
+	insert(root,70);
+	insert(root,67);
+	insert(root,89);
+	insert(root,54);
+	insert(root,32);
+	insert(root,14);
+	insert(root,56);
+	insert(root,66);
+	insert(root,80);
 	
 	
+	printAllLevels(root);
+	printf("height of the tree :%d\n",height(root));
+	
+	deleteNode(root,54);
 	printAllLevels(root);
 
 

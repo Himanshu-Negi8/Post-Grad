@@ -154,20 +154,19 @@ int replaceParentWithChildSum(node*root){
 void main()
 {
 	node*root = NULL;
-	root = insert(root,'D');
-	insert(root,'E');
-	insert(root,'S');
+	root = insert(root,'M');
+	insert(root,'N');
+	insert(root,'R');
 	insert(root,'T');
-	insert(root,'U');
-	insert(root,'Z');
+	insert(root,'S');
+	insert(root,'D');
+	insert(root,'H');
 	insert(root,'A');
-	insert(root,'V');
+	insert(root,'W');
 	insert(root,'B');
-	insert(root,'M');
-	insert(root,'K');
-	insert(root,'O');
-	insert(root,'Q');
-	insert(root,'J');
+	insert(root,'Z');
+	insert(root,'C');
+	
 	
 	
 	
