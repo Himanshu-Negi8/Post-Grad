@@ -154,6 +154,8 @@ void printAllLevels(node*root)
 		
 	}
 }
+
+//total number of nodes
 int countNodes(node*root){
 	
 	if(root==NULL){
@@ -164,7 +166,63 @@ int countNodes(node*root){
 	return left+right+1;
 }
 
+//total leaf nodes
 
+int leafNodes(node*root){
+	
+	if(root==NULL){
+		return 0;
+	}
+	if(root->left==NULL&&root->right==NULL){
+		return 1;
+	}
+	return leafNodes(root->left)+leafNodes(root->right);
+}
+
+//total nodes having left child only
+
+int countleftChildOnly(node*root){
+	
+	if(root==NULL){
+		return 0;
+	}
+	if(root->left!=NULL && root->right==NULL){
+		//printf("%d  ",root->data); // incase want to show which nodes having the specified
+		return 1+countleftChildOnly(root->left);
+	}
+	return countleftChildOnly(root->left)+countleftChildOnly(root->right);
+}
+
+//total nodes having right child only
+
+int countrightChildOnly(node*root){
+	
+	if(root==NULL){
+		return 0;
+	}
+	if(root->right!=NULL && root->left==NULL){
+		
+		//printf("%d  ",root->data); // incase want to show which nodes having the specified
+		return 1+countrightChildOnly(root->right);
+	}
+	return countrightChildOnly(root->right)+countrightChildOnly(root->left);
+}
+
+//search the key in bst
+node*searchKey(node*root,int key){
+	if(root==NULL){
+		return root;
+	}
+	if(root->data = key){
+		return root;
+	}
+	if(key<root->data){
+		return searchKey(root->left,key);
+	}
+	else{
+		return searchKey(root->right,key);
+	}
+}
 
 int sumOfAllNodes(node*root){
 	
@@ -209,28 +267,33 @@ int replaceParentWithChildSum(node*root){
 	
 	
 }
+
 void main()
 {
 	node*root = NULL;
-	root = insert(root,50);
-	insert(root,22);
-	insert(root,34);
-	insert(root,70);
-	insert(root,67);
-	insert(root,89);
-	insert(root,54);
-	insert(root,32);
-	insert(root,14);
-	insert(root,56);
-	insert(root,66);
-	insert(root,80);
-	
+	root = insert(root,20);
+	insert(root,35);
+	insert(root,30);
+	insert(root,31);
+	insert(root,19);
+	insert(root,18);
+	insert(root,15);
+	insert(root,17);
 	
 	printAllLevels(root);
 	printf("height of the tree :%d\n",height(root));
+	printf("total number of nodes:%d\n",countNodes(root));
+	printf("total number of leaf nodes:%d\n",leafNodes(root));
+	printf(" nodes having left child only : %d\n",countleftChildOnly(root));
+	printf(" nodes having right child only :%d\n",countrightChildOnly(root));
+	node*temp=searchKey(root,19);
+	if(temp->data==50)
+	{
+		printf("found");
+	}
 	
-	deleteNode(root,54);
-	printAllLevels(root);
+//	deleteNode(root,54);
+//	printAllLevels(root);
 
 
 }

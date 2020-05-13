@@ -1,6 +1,11 @@
+---
+# Program for Binary Search Tree
+
 ```c
 #include<stdio.h>
 #include<stdlib.h>
+
+#define MAX(a,b) ((a>b)?a:b)
 
 typedef struct node{
 	
@@ -57,6 +62,63 @@ void inorder(node*root)
 	}
 }
 
+
+node*deleteNode(node*root,int key)
+{
+	if(root==NULL){
+		return root;
+	}
+	
+	else if(key<root->data){
+		root->left = deleteNode(root->left,key);
+		return root;
+	}
+	
+	else if(key>root->data){
+		root->right = deleteNode(root->right,key);
+		return root;
+	}
+	else if(root->data==key){
+		//node is leaf
+		
+			if(root->left==NULL && root->right==NULL){
+				free(root);
+				return NULL;
+				
+			}
+			
+			//node having 1 child only
+			
+			if(root->left!=NULL && root->right==NULL){
+				node*temp = root->left;
+				free(root);
+				return temp;
+			}
+			
+			if(root->left==NULL && root->right!=NULL){
+				node*temp = root->right;
+				free(root);
+				return temp;
+			}
+			
+			//3.node with 2 child
+			
+			node*replace = root->right;
+			while(replace->left!=NULL){
+				replace = replace->left;
+			}
+			root->data = replace->data;
+			root->right = deleteNode(root->right,replace->data);
+			
+			return root;
+		}
+		 
+		
+}
+	
+
+
+
 int height(node*root)
 {
 	if(root==NULL)
@@ -65,7 +127,7 @@ int height(node*root)
 	}
 	int left = height(root->left);
 	int right = height(root->right);
-	return max(left,right)+1;
+	return MAX(left,right)+1;
 }
 
 void printKthlevel(node*root,int k)
@@ -76,7 +138,7 @@ void printKthlevel(node*root,int k)
 	}
 	if(k==1)
 	{
-		cout<<root->data<<" ";
+		printf("%d ",root->data);
 		return;
 	}
 	printKthlevel(root->left,k-1);
@@ -86,12 +148,18 @@ void printKthlevel(node*root,int k)
 void printAllLevels(node*root)
 {
 	int h = height(root);
-	for(int i=1;i<=h;i++)
+	int i;
+	for(i=1;i<=h;i++)
 	{
+		printf("printing %d level : ",i);
 		printKthlevel(root,i);
-		cout<<endl; 
+	
+		printf("\n");
+		
 	}
 }
+
+//total number of nodes
 int countNodes(node*root){
 	
 	if(root==NULL){
@@ -102,37 +170,62 @@ int countNodes(node*root){
 	return left+right+1;
 }
 
+//total leaf nodes
 
-//printing the level wise tree in O(n) time
-void bfs(node*root) {
-
-	queue<node*>q;
+int leafNodes(node*root){
 	
-	q.push(root);
-	
-	while(!q.empty()){
-		
-		node*f = q.front();
-		if(f==NULL)
-		{
-				cout<<endl;
-				q.pop();
-				if(!q.empty()){
-					q.push(NULL);
-				}
-		}else{
-			cout<<f->data<<" ";
-			q.pop();
-			if(f->left){
-				q.push(f->left);
-			}
-			if(f->right){
-				q.push(f->right);
-			}
-		}
-		
+	if(root==NULL){
+		return 0;
 	}
-	return;
+	if(root->left==NULL&&root->right==NULL){
+		return 1;
+	}
+	return leafNodes(root->left)+leafNodes(root->right);
+}
+
+//total nodes having left child only
+
+int countleftChildOnly(node*root){
+	
+	if(root==NULL){
+		return 0;
+	}
+	if(root->left!=NULL && root->right==NULL){
+		//printf("%d  ",root->data); // incase want to show which nodes having the specified
+		return 1+countleftChildOnly(root->left);
+	}
+	return countleftChildOnly(root->left)+countleftChildOnly(root->right);
+}
+
+//total nodes having right child only
+
+int countrightChildOnly(node*root){
+	
+	if(root==NULL){
+		return 0;
+	}
+	if(root->right!=NULL && root->left==NULL){
+		
+		//printf("%d  ",root->data); // incase want to show which nodes having the specified
+		return 1+countrightChildOnly(root->right);
+	}
+	return countrightChildOnly(root->right)+countrightChildOnly(root->left);
+}
+
+//search the key in bst
+node*searchKey(node*root,int key){
+	if(root==NULL){
+		return root;
+	}
+	if(root->data = key){
+		return root;
+	}
+	if(key<root->data){
+		return searchKey(root->left,key);
+	}
+	else{
+		return searchKey(root->right,key);
+	}
 }
 
 int sumOfAllNodes(node*root){
@@ -157,7 +250,7 @@ int diameter(node*root){
 	int op1 = h1+h2;
 	int op2 = diameter(root->left);
 	int op3 = diameter(root->right);
-	return max(op1,max(op2,op3));
+	return MAX(op1,MAX(op2,op3));
 }
 
 int replaceParentWithChildSum(node*root){
@@ -178,20 +271,36 @@ int replaceParentWithChildSum(node*root){
 	
 	
 }
+
 void main()
 {
 	node*root = NULL;
-	root = insert(root,30);
-	insert(root,40);
-	insert(root,20);
-	insert(root,10);
-	insert(root,50);
-	insert(root,5);
-	preorder(root);
-	inorder(root);
+	root = insert(root,20);
+	insert(root,35);
+	insert(root,30);
+	insert(root,31);
+	insert(root,19);
+	insert(root,18);
+	insert(root,15);
+	insert(root,17);
+	
+	printAllLevels(root);
+	printf("height of the tree :%d\n",height(root));
+	printf("total number of nodes:%d\n",countNodes(root));
+	printf("total number of leaf nodes:%d\n",leafNodes(root));
+	printf(" nodes having left child only : %d\n",countleftChildOnly(root));
+	printf(" nodes having right child only :%d\n",countrightChildOnly(root));
+	node*temp=searchKey(root,19);
+	if(temp->data==50)
+	{
+		printf("found");
+	}
+	
+//	deleteNode(root,54);
+//	printAllLevels(root);
+
+
 }
-
-
 ```
 
 ---

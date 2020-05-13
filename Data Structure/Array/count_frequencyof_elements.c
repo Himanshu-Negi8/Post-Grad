@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<limits.h>
-void count_frequency(arr,n);
+void count_frequency(int arr[],int n);
 void main()
 {
 	int n;
@@ -8,7 +8,7 @@ void main()
 	scanf("%d",&n);
 	
 	int arr[n],i;
-	printf("\nenter the elements for array : ")
+	printf("\nenter the elements for array : ");
 	for(i=0;i<n;i++)
 	{
 		scanf("%d",&arr[i]);
@@ -45,7 +45,7 @@ void count_frequency(int arr[],int n)
 	{
 		if(freq[i]!=0)
 		{
-			printf("%d occurs %d times : ",arr[i],freq[i]);
+			printf("%d occurs %d times\n",arr[i],freq[i]);
 		}
 		
 	}
