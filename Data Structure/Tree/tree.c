@@ -271,14 +271,16 @@ int replaceParentWithChildSum(node*root){
 void main()
 {
 	node*root = NULL;
-	root = insert(root,20);
-	insert(root,35);
-	insert(root,30);
-	insert(root,31);
-	insert(root,19);
-	insert(root,18);
-	insert(root,15);
-	insert(root,17);
+	root = insert(root,50);
+	insert(root,40);
+	insert(root,25);
+	insert(root,45);
+	insert(root,80);
+	insert(root,65);
+	insert(root,85);
+	insert(root,81);
+	insert(root,88);
+	
 	
 	printAllLevels(root);
 	printf("height of the tree :%d\n",height(root));
@@ -286,14 +288,15 @@ void main()
 	printf("total number of leaf nodes:%d\n",leafNodes(root));
 	printf(" nodes having left child only : %d\n",countleftChildOnly(root));
 	printf(" nodes having right child only :%d\n",countrightChildOnly(root));
-	node*temp=searchKey(root,19);
-	if(temp->data==50)
-	{
-		printf("found");
-	}
+//	node*temp=searchKey(root,19);
+//	if(temp->data==50)
+//	{
+//		printf("found");
+//	}
 	
-//	deleteNode(root,54);
-//	printAllLevels(root);
+	deleteNode(root,40);
+	inorder(root);
+	printAllLevels(root);
 
 
 }
