@@ -1,42 +1,42 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct node{
+typedef struct stack{
+	int data;
+	struct stack*next;
 	
-	struct node*next;
-	int info;
-}node;
+}nodetype;
 
 
-void push(node**head_ref,int value)
+void push(nodetype**head_ref,int value)
 {
-	node*temp = (node*)malloc(sizeof(node));
-	temp->info=value;
+	nodetype*temp = (nodetype*)malloc(sizeof(nodetype));
+	temp->data=value;
 	temp->next = (*head_ref);
 	*head_ref = temp;	
 }
 
 
-void pop(node**head_ref){
+void pop(nodetype**head_ref){
 	
-	node*p = (*head_ref);
-	printf("%d deleted node",p->info);
+	nodetype*p = (*head_ref);
+	printf("%d deleted node",p->data);
 	*head_ref=(*head_ref)->next;
 	free(p);
 }
 
-void display(node*head)
+void display(nodetype*head)
 {
 	while(head!=NULL)
 	{
-		printf("%d ",head->info);
+		printf("%d ",head->data);
 		head=head->next;
 	}
 }
 int main()
 {
 	
-	node*head = NULL;
+	nodetype*head = NULL;
 	char ch ;
 	
 	do{

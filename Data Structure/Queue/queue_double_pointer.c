@@ -15,13 +15,21 @@ void insert(node**rear,int value)
 	if(*rear==NULL)
 	{
 		*rear = temp;
-		
+		//if we are inserting first time we will just make temp as rear 
 	}
 	else
 	{
-		(*rear)->next = temp;
+		(*rear)->next = temp; 
+		
+		/*if we have already some nodes we will add this node in next of rear and 
+		then this node as rear as it is the last node we inserted then we will make it's next null 
+		so that it will not give us error of infine loop while displaying the element*/
+		
 		(*rear) = temp;
+		
+		(*rear)->next=NULL;
 	}
+	
 	
 }
 

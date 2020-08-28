@@ -34,6 +34,7 @@ void calculate_third_repeat(int arr[],int n)
 				arr[j]=-1;
 				break;
 			}
+			
 			if(count==3)
 			{
 				flag=1;

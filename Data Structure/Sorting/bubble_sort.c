@@ -36,7 +36,7 @@ int main()
 			}
 		}
 		count++;
-		printf("%d pass ",count);
+		printf("%d pass ",ps);
 		for(k=0;k<size;k++){
 			
 			printf("%d ",arr[k]);
