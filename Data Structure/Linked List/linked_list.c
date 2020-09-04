@@ -126,7 +126,37 @@ void display(node*tp)
 	printf("\n");
 }
 
-
+void swap(node *a, node *b) 
+{ 
+    int temp = a->info; 
+    a->info = b->info; 
+    b->info = temp; 
+} 
+void bubbleSort(node*head){
+	
+	int swapped;
+	node*temp;
+	node*lptr = NULL;
+	
+	if(head==NULL) return;
+	
+	do{
+		
+		swapped =0;
+		temp = head;
+		
+		while(temp->next!=NULL){
+			
+			if(temp->info > temp->next->info){
+				swap(temp,temp->next);
+				swapped=1;
+			}
+			temp = temp->next;
+		}
+		lptr = temp;
+		
+	}while(swapped);
+}
 void main()
 {
 	node*start = NULL;
@@ -152,6 +182,9 @@ void main()
 	start = insertNodeAtK(start,val,k);	
 	display(start);
 	start=deleteAtHead(start);
+	display(start);
+	
+	bubbleSort(start);
 	display(start);
 	
 }
