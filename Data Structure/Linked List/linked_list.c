@@ -157,11 +157,18 @@ void bubbleSort(node*head){
 		
 	}while(swapped);
 }
+
+void reverse_print(node*head){
+	if(head==NULL) return;
+	
+	reverse_print(head->next);
+	printf("%d ",head->info);
+}
 void main()
 {
 	node*start = NULL;
-	int val,k;
 
+	int val,k;
 	printf("Enter the item to be inserted : ");
 	scanf("%d",&val);
 	start = insertNodeAtBegin(start,val);
@@ -173,18 +180,35 @@ void main()
 	start = insertNodeAtBegin(start,val);
 	printf("enter the item to be inserted : ");
 	scanf("%d",&val);
-	start = insertNodeAtEnd(start,val);
-	printf("enter the item to be inserted : ");
-	scanf("%d",&val);
-	start = insertNodeAtEnd(start,val);	
-	printf("enter the item to be inserted and location: ");
-	scanf("%d%d",&val,&k);
-	start = insertNodeAtK(start,val,k);	
-	display(start);
-	start=deleteAtHead(start);
+	start = insertNodeAtBegin(start,val);
 	display(start);
 	
-	bubbleSort(start);
-	display(start);
+	
+
+//	printf("Enter the item to be inserted : ");
+//	scanf("%d",&val);
+//	start = insertNodeAtBegin(start,val);
+//	printf("Enter the item to be inserted : ");
+//	scanf("%d",&val);
+//	start = insertNodeAtBegin(start,val);
+//	printf("Enter the item to be inserted : ");
+//	scanf("%d",&val);
+//	start = insertNodeAtBegin(start,val);
+//	printf("enter the item to be inserted : ");
+//	scanf("%d",&val);
+//	start = insertNodeAtEnd(start,val);
+//	printf("enter the item to be inserted : ");
+//	scanf("%d",&val);
+//	start = insertNodeAtEnd(start,val);	
+//	printf("enter the item to be inserted and location: ");
+//	scanf("%d%d",&val,&k);
+//	start = insertNodeAtK(start,val,k);	
+//	display(start);
+//	start=deleteAtHead(start);
+//	display(start);
+//	
+//	bubbleSort(start);
+	
+	
 	
 }
